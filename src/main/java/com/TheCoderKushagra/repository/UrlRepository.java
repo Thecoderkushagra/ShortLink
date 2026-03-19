@@ -28,7 +28,7 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long> {
     );
 
     @Modifying
-    @Query(" UPDATE Url u " + " SET u.clickCount = u.clickCount + :count " + " WHERE u.id = :id ")
+    @Query(" UPDATE UrlEntity u " + " SET u.clickCount = u.clickCount + :count " + " WHERE u.id = :id ")
     void incrementClickCount(@Param("id") long id, @Param("count") long count);
 
 }
