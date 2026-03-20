@@ -2,7 +2,7 @@ package com.TheCoderKushagra.repository;
 
 import com.TheCoderKushagra.entity.UrlEntity;
 import io.lettuce.core.dynamic.annotation.Param;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,6 +28,7 @@ public interface UrlRepository extends JpaRepository<UrlEntity, Long> {
     );
 
     @Modifying
+    @Transactional
     @Query(" UPDATE UrlEntity u " + " SET u.clickCount = u.clickCount + :count " + " WHERE u.id = :id ")
     void incrementClickCount(@Param("id") long id, @Param("count") long count);
 

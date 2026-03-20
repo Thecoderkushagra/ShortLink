@@ -1,6 +1,7 @@
 package com.TheCoderKushagra.service;
 
 import com.TheCoderKushagra.repository.UrlRepository;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,6 +16,7 @@ public class CounterFlushService {
     private final UrlRepository urlRepository;
 
     @Scheduled(fixedRate = 60000)
+    @Transactional
     public void flushCounters() {
         Set<String> keys = redisTemplate.keys("url:*:clicks");
         for (String key : keys) {
